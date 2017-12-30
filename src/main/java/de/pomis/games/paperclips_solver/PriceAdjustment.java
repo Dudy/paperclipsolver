@@ -1,7 +1,5 @@
 package de.pomis.games.paperclips_solver;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -33,11 +31,7 @@ public class PriceAdjustment extends SimpleAction {
             }
             lastMeasurement = currentMeasurement;
             
-            try {
-                Thread.sleep(CHECK_INTERVALL);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(PriceAdjustment.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            waitASecond();
         }
     }
 

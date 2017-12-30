@@ -1,13 +1,10 @@
 package de.pomis.games.paperclips_solver;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class BuyAutoclipper extends SimpleAction {
     
-    private static final int CHECK_INTERVALL = 1000;
     private static final int MAX_AMOUNT = 100;
     private static final int MIN_WIRE_AMOUNT = 1000;
     
@@ -39,11 +36,7 @@ public class BuyAutoclipper extends SimpleAction {
                 }
             }
             
-            try {
-                Thread.sleep(CHECK_INTERVALL);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(BuyAutoclipper.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            waitASecond();
         }
     }
 

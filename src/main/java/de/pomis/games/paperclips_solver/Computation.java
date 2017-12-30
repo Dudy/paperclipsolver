@@ -34,6 +34,8 @@ public class Computation extends SimpleAction {
                     addMemory.click();
                 }
             }
+            
+            waitASecond();
         }
     }
 
