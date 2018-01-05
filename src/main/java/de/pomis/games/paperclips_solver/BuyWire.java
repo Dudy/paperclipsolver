@@ -17,10 +17,14 @@ public class BuyWire extends SimpleAction {
     private final WebElement wireCost;
 
     public BuyWire(WebDriver webDriver) {
-        this.button = Button.BUY_WIRE.getElement(webDriver);
-        this.indicator = Indicator.WIRES.getElement(webDriver);
-        this.funds = Indicator.FUNDS.getElement(webDriver);
-        this.wireCost = Indicator.WIRE_COST.getElement(webDriver);
+        super(webDriver);
+        
+        this.button = getButton(Button.BUY_WIRE);
+        
+        this.indicator = getIndicator(Indicator.WIRES);
+        this.funds = getIndicator(Indicator.FUNDS);
+        this.wireCost = getIndicator(Indicator.WIRE_COST);
+        
         this.running = true;
     }
 
@@ -32,10 +36,10 @@ public class BuyWire extends SimpleAction {
             
             if (numOfWires < MAX_AMOUNT) {
                 if (button.isEnabled()) {
-                    LOG.log(Level.INFO, "got {0} wires, which is less than {1} wires, and got {2} which is more than the needed {3}, so buy one more spool", new Object[]{numOfWires, MAX_AMOUNT, formatCurrency(longValue(funds)), formatCurrency(longValue(wireCost))});
+                    LOG.log(Level.INFO, "got {0} wires, which is less than {1} wires, and got {2} which is more than the needed {3}, so buy one more spool", new Object[]{numOfWires, MAX_AMOUNT, formatCurrency(readCurrency(funds)), formatCurrency(readCurrency(wireCost))});
                     button.click();
                 } else {
-                    LOG.log(Level.FINER, "${0} is not enough money to buy a spool of wire that costs ${1}", new Object[]{formatCurrency(longValue(funds)), formatCurrency(longValue(wireCost))});
+                    LOG.log(Level.FINER, "${0} is not enough money to buy a spool of wire that costs ${1}", new Object[]{formatCurrency(readCurrency(funds)), formatCurrency(readCurrency(wireCost))});
                 }
             } else {
                 LOG.log(Level.FINER, "still have {0}, which is more than {1}, do not rebuy", new Object[]{numOfWires, MAX_AMOUNT});

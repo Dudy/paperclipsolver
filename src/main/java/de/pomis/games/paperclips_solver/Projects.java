@@ -13,10 +13,8 @@ public class Projects extends SimpleAction {
 
     private int index = 0;
 
-    private final WebDriver webDriver;
-
     public Projects(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver);
     }
 
     @Override

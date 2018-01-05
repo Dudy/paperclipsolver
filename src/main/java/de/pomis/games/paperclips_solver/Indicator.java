@@ -1,9 +1,5 @@
 package de.pomis.games.paperclips_solver;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 public enum Indicator {
 
     WIRES("wire"),
@@ -12,7 +8,9 @@ public enum Indicator {
     CLIPS("unsoldClips"),
     AUTOCLIPPERS("clipmakerLevel2"),
     PROCESSORS("processors"),
-    MEMORY("memory");
+    MEMORY("memory"),
+    MARKETING_COST("adCost"),
+    AUTOCLIPPER_COST("clipperCost");
     
     private final String id;
 
@@ -22,10 +20,6 @@ public enum Indicator {
 
     public String getId() {
         return id;
-    }
-    
-    public WebElement getElement(WebDriver webDriver) {
-        return webDriver.findElement(By.id(id));
     }
     
 }

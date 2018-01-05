@@ -13,10 +13,13 @@ public class Computation extends SimpleAction {
     private final WebElement memoryIndicator;
 
     public Computation(WebDriver webDriver) {
-        this.addProcessor = Button.ADD_PROCESSOR.getElement(webDriver);
-        this.addMemory = Button.ADD_MEMORY.getElement(webDriver);
-        this.processorIndicator = Indicator.PROCESSORS.getElement(webDriver);
-        this.memoryIndicator = Indicator.MEMORY.getElement(webDriver);
+        super(webDriver);
+        
+        this.addProcessor = getButton(Button.ADD_PROCESSOR);
+        this.addMemory = getButton(Button.ADD_MEMORY);
+        
+        this.processorIndicator = getIndicator(Indicator.PROCESSORS);
+        this.memoryIndicator = getIndicator(Indicator.MEMORY);
     }
 
     @Override

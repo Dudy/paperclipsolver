@@ -8,7 +8,9 @@ public class Marketing extends SimpleAction {
     private final WebElement button;
 
     public Marketing(WebDriver webDriver) {
-        this.button = Button.MARKETING.getElement(webDriver);
+        super(webDriver);
+        
+        this.button = getButton(Button.MARKETING);
     }
 
     @Override

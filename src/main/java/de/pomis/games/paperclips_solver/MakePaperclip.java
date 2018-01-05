@@ -11,7 +11,9 @@ public class MakePaperclip extends SimpleAction {
     private final WebElement button;
 
     public MakePaperclip(WebDriver webDriver) {
-        this.button = Button.MAKE_PAPERCLIP.getElement(webDriver);
+        super(webDriver);
+        
+        this.button = getButton(Button.MAKE_PAPERCLIP);
     }
 
     @Override

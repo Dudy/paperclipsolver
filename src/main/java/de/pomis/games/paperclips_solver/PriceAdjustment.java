@@ -13,9 +13,13 @@ public class PriceAdjustment extends SimpleAction {
     private long lastMeasurement;
 
     public PriceAdjustment(WebDriver webDriver) {
-        this.lower = Button.LOWER_PRICE.getElement(webDriver);
-        this.raise = Button.RAISE_PRICE.getElement(webDriver);
-        this.indicator = Indicator.CLIPS.getElement(webDriver);
+        super(webDriver);
+        
+        this.lower = getButton(Button.LOWER_PRICE);
+        this.raise = getButton(Button.RAISE_PRICE);
+        
+        this.indicator = getIndicator(Indicator.CLIPS);
+        
         this.running = true;
         this.lastMeasurement = 0;
     }
