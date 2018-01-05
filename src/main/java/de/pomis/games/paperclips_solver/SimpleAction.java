@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import org.openqa.selenium.WebElement;
 
 public abstract class SimpleAction implements Runnable {
+
+    private static final Logger LOG = Logger.getLogger(SimpleAction.class.getName());
     
     protected boolean running = true;
 
@@ -17,15 +19,39 @@ public abstract class SimpleAction implements Runnable {
     }
     
     protected long longValue(WebElement indicator) {
-        if (indicator.getText().length() == 0) {
-            return 0;
+        LOG.log(Level.FINER, "scan indicator {0}", indicator);
+        
+        long value = 0;
+        
+        String indicatorText = indicator.getText().replace(",", "");
+        
+        LOG.log(Level.FINER, "indicator text: {0}", indicatorText);
+        
+        if (!indicatorText.isEmpty()) {
+            String[] indicatorTextParts = indicatorText.split("\\.");
+            
+            value = Long.parseLong(indicatorTextParts[0]) * 100;
+            
+            if (indicatorTextParts.length > 1) {
+                value += Long.parseLong(indicatorTextParts[1]);
+            }
         }
         
-        return Long.parseLong(indicator.getText().replace(",", ""));
+        LOG.log(Level.FINE, "indicator value: {0}", value);
+        
+        return value;
+    }
+    
+    protected String formatCurrency(long amount) {
+        long cent = amount % 100;
+        long dollar = (amount - cent) / 100;
+        
+        return "$" + dollar + "." + cent;
     }
 
     protected void waitASecond() {
         try {
+            LOG.fine("sleep for a second");
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(BuyAutoclipper.class.getName()).log(Level.SEVERE, null, ex);

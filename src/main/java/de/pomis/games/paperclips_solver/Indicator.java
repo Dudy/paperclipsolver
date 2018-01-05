@@ -8,6 +8,7 @@ public enum Indicator {
 
     WIRES("wire"),
     FUNDS("funds"),
+    WIRE_COST("wireCost"),
     CLIPS("unsoldClips"),
     AUTOCLIPPERS("clipmakerLevel2"),
     PROCESSORS("processors"),
