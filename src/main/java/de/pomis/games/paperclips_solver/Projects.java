@@ -13,7 +13,7 @@ public class Projects extends SimpleAction {
     private static final Logger LOG = Logger.getLogger(Projects.class.getName());
 
     private static final String PREFIX = "projectButton";
-    private static final int[] ORDER = new int[]{3, 42, 1, 6, 50};
+    private static final int[] ORDER = new int[]{3, 42, 1, 6, 13, 14, 15, 11, 4, 7, 12, 8, 5, 16, 26 };
 
     private int index = 0;
 
