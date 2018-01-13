@@ -1,9 +1,13 @@
 package de.pomis.games.paperclips_solver;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class Computation extends SimpleAction {
+    
+    private static final Logger LOG = Logger.getLogger(Computation.class.getName());
 
     private static final int MIN_PROCESSORS = 5;
 
@@ -33,8 +37,10 @@ public class Computation extends SimpleAction {
 
                 if (2 * processors < memory || processors < MIN_PROCESSORS) {
                     addProcessor.click();
+                    LOG.log(Level.INFO, "we have {0} processors and {1} memory, so buy one processor", new Object[] {processors, memory});
                 } else {
                     addMemory.click();
+                    LOG.log(Level.INFO, "we have {0} processors and {1} memory, so buy one memory", new Object[] {processors, memory});
                 }
             }
             

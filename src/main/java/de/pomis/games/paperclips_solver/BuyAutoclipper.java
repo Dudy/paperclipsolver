@@ -65,8 +65,8 @@ public class BuyAutoclipper extends SimpleAction {
                         
                         if (ratio < MAX_AUTOCLIPPER_PERCENTAGE_OF_MARKETING) {
                             if (button.isEnabled()) {
-                                LOG.log(Level.INFO, "buy one autoclipper, now you got {0}", new Object[] { longValue(indicator) });
                                 button.click();
+                                LOG.log(Level.INFO, "buy one autoclipper, now you got {0}", new Object[] { longValue(indicator) });
                             } else {
                                 LOG.log(Level.INFO, "like to buy one autoclipper, but only got {0} (need {1})", new Object[] { formatCurrency(readCurrency(funds)), formatCurrency(autoclipperCostAmount) });
                             }
