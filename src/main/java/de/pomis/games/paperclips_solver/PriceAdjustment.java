@@ -8,6 +8,7 @@ public class PriceAdjustment extends SimpleAction {
     private final WebElement lower;
     private final WebElement raise;
     private final WebElement indicator;
+    private final WebElement clips;
     private long lastMeasurement;
 
     public PriceAdjustment(WebDriver webDriver) {
@@ -17,6 +18,7 @@ public class PriceAdjustment extends SimpleAction {
         this.raise = getButton(Button.RAISE_PRICE);
         
         this.indicator = getIndicator(Indicator.UNSOLD_CLIPS);
+        this.clips = getIndicator(Indicator.CLIPS);
         
         this.running = true;
         this.lastMeasurement = 0;
@@ -26,7 +28,10 @@ public class PriceAdjustment extends SimpleAction {
     public void run() {
         while (running) {
             long currentMeasurement = longValue(indicator);
-            if (currentMeasurement > lastMeasurement) {
+            long currentClips = longValue(clips);
+            
+            if (    currentMeasurement * 10 > currentClips &&
+                    currentMeasurement > lastMeasurement) {
                 lower.click();
             } else {
                 raise.click();
