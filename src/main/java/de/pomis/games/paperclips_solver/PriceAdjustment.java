@@ -5,8 +5,6 @@ import org.openqa.selenium.WebElement;
 
 public class PriceAdjustment extends SimpleAction {
     
-    private static final int CHECK_INTERVALL = 1000;
-    
     private final WebElement lower;
     private final WebElement raise;
     private final WebElement indicator;
@@ -18,7 +16,7 @@ public class PriceAdjustment extends SimpleAction {
         this.lower = getButton(Button.LOWER_PRICE);
         this.raise = getButton(Button.RAISE_PRICE);
         
-        this.indicator = getIndicator(Indicator.CLIPS);
+        this.indicator = getIndicator(Indicator.UNSOLD_CLIPS);
         
         this.running = true;
         this.lastMeasurement = 0;

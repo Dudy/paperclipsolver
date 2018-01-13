@@ -10,11 +10,14 @@ public class BuyAutoclipper extends SimpleAction {
     private static final Logger LOG = Logger.getLogger(BuyAutoclipper.class.getName());
     
     private static final int MAX_AMOUNT = 100;
-    private static final int MIN_WIRE_AMOUNT = 1000;
     private static final float MAX_AUTOCLIPPER_PERCENTAGE_OF_MARKETING = 0.25f;
+    private static final int MIN_WIRE_AMOUNT_INCREASE_THRESHOLD = 1000;
+    
+    private int minWireAmount = 1000;
     
     private final WebElement button;
     private final WebElement indicator;
+    private final WebElement clips;
     private final WebElement wires;
     private final WebElement funds;
     private final WebElement marketingCost;
@@ -26,6 +29,7 @@ public class BuyAutoclipper extends SimpleAction {
         this.button = getButton(Button.AUTOCLIPPER);
         
         this.indicator = getIndicator(Indicator.AUTOCLIPPERS);
+        this.clips  = getIndicator(Indicator.CLIPS);
         this.wires = getIndicator(Indicator.WIRES);
         this.funds = getIndicator(Indicator.FUNDS);
         this.marketingCost = getIndicator(Indicator.MARKETING_COST);
@@ -44,7 +48,7 @@ public class BuyAutoclipper extends SimpleAction {
                 long numOfWires = longValue(wires);
                 LOG.log(Level.FINE, "number of wires: {0}", numOfWires);
                 
-                boolean enoughWires = numOfWires > MIN_WIRE_AMOUNT;
+                boolean enoughWires = numOfWires > minWireAmount;
                 
                 if (enoughWires) {
                     LOG.fine("enough wires available");
@@ -82,6 +86,10 @@ public class BuyAutoclipper extends SimpleAction {
                 }
             } else {
                 LOG.fine("AutoClipper not available");
+            }
+            
+            if (longValue(clips) > MIN_WIRE_AMOUNT_INCREASE_THRESHOLD) {
+                minWireAmount += 1000;
             }
             
             waitASecond();
