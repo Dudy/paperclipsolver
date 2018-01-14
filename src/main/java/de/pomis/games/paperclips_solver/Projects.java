@@ -33,7 +33,7 @@ public class Projects extends SimpleAction {
                     if (currentProject.isEnabled()) {
                         currentProject.click();
                         index++;
-                        LOG.log(Level.INFO, "current project finished, increased index is now {0}", index);
+                        LOG.log(Level.INFO, "current project {0} finished, increased index to {1}, next project is {2}", new Object[] { ORDER[index - 1], index, ORDER[index] });
                     }
                 }
             } else {
