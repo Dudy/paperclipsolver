@@ -35,12 +35,14 @@ public class Computation extends SimpleAction {
                 long processors = longValue(processorIndicator);
                 long memory = longValue(memoryIndicator);
 
-                if (2 * processors < memory || processors < MIN_PROCESSORS) {
-                    addProcessor.click();
-                    LOG.log(Level.INFO, "we have {0} processors and {1} memory, so buy one processor", new Object[] {processors, memory});
-                } else {
-                    addMemory.click();
-                    LOG.log(Level.INFO, "we have {0} processors and {1} memory, so buy one memory", new Object[] {processors, memory});
+                if (addProcessor.isEnabled()) {
+                    if (2 * processors < memory || processors < MIN_PROCESSORS) {
+                        addProcessor.click();
+                        LOG.log(Level.INFO, "we have {0} processors and {1} memory, so buy one processor", new Object[] {processors, memory});
+                    } else {
+                        addMemory.click();
+                        LOG.log(Level.INFO, "we have {0} processors and {1} memory, so buy one memory", new Object[] {processors, memory});
+                    }
                 }
             }
             
