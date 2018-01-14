@@ -11,7 +11,7 @@ public class BuyAutoclipper extends SimpleAction {
     
     private static final int MAX_AMOUNT = 100;
     private static final float MAX_AUTOCLIPPER_PERCENTAGE_OF_MARKETING = 0.25f;
-    private static final int MIN_WIRE_AMOUNT_INCREASE_THRESHOLD = 1000;
+    private static final int MIN_WIRE_AMOUNT_INCREASE_THRESHOLD = 10000;
     
     private int minWireAmount = 1000;
     
@@ -89,7 +89,9 @@ public class BuyAutoclipper extends SimpleAction {
             }
             
             if (longValue(clips) > MIN_WIRE_AMOUNT_INCREASE_THRESHOLD) {
-                minWireAmount += 1000;
+                minWireAmount *= 2;
+                
+                LOG.log(Level.FINE, "minWireAmount raised to {0}", minWireAmount);
             }
             
             waitASecond();
