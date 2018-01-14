@@ -13,7 +13,14 @@ public class Projects extends SimpleAction {
     private static final Logger LOG = Logger.getLogger(Projects.class.getName());
 
     private static final String PREFIX = "projectButton";
-    private static final int[] ORDER = new int[]{3, 42, 1, 6, 13, 14, 15, 11, 4, 7, 12, 8, 5, 16, 26 };
+    private static final int[] ORDER = new int[]{
+         3, 42,  1,  6, 13,
+        14, 15, 11,  4,  7,
+        12,  8,  5, 16, 26,
+         9, 34, 17, 19, 50,
+        51, 22, 10, 20, 21 };
+    
+    // TODO: after project 26, the BuyWire thread may be killed
 
     private int index = 0;
 
