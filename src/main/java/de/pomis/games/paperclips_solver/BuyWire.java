@@ -9,8 +9,7 @@ public class BuyWire extends SimpleAction {
 
     private static final Logger LOG = Logger.getLogger(BuyWire.class.getName());
 
-    private static final int MIN_WIRE_AMOUNT_INCREASE_THRESHOLD = 10000;    
-    
+    private int minWireAmountIncThreshold = 10000;    
     private int minWireAmount = 1000;
     
     private final WebElement button;
@@ -43,16 +42,22 @@ public class BuyWire extends SimpleAction {
                     button.click();
                     LOG.log(Level.INFO, "got {0} wires, which is less than {1} wires, and got {2} which is more than the needed {3}, so buy one more spool", new Object[]{numOfWires, minWireAmount, formatCurrency(readCurrency(funds)), formatCurrency(readCurrency(wireCost))});
                 } else {
-                    LOG.log(Level.FINER, "${0} is not enough money to buy a spool of wire that costs ${1}", new Object[]{formatCurrency(readCurrency(funds)), formatCurrency(readCurrency(wireCost))});
+                    LOG.log(Level.FINER, "{0} is not enough money to buy a spool of wire that costs {1}", new Object[]{formatCurrency(readCurrency(funds)), formatCurrency(readCurrency(wireCost))});
+                    LOG.log(Level.SEVERE, "{0} is not enough money to buy a spool of wire that costs {1}", new Object[]{formatCurrency(readCurrency(funds)), formatCurrency(readCurrency(wireCost))});
                 }
             } else {
                 LOG.log(Level.FINER, "still have {0}, which is more than {1}, do not rebuy", new Object[]{numOfWires, minWireAmount});
+                LOG.log(Level.SEVERE, "still have {0}, which is more than {1}, do not rebuy", new Object[]{numOfWires, minWireAmount});
             }
             
-            if (longValue(clips) > MIN_WIRE_AMOUNT_INCREASE_THRESHOLD) {
+            if (longValue(clips) > minWireAmountIncThreshold) {
                 minWireAmount *= 2;
+                minWireAmountIncThreshold *= 10;
                 
                 LOG.log(Level.FINE, "minWireAmount raised to {0}", minWireAmount);
+                LOG.log(Level.FINE, "minWireAmountIncThreshold raised to {0}", minWireAmountIncThreshold);
+                LOG.log(Level.SEVERE, "minWireAmount raised to {0}", minWireAmount);
+                LOG.log(Level.SEVERE, "minWireAmountIncThreshold raised to {0}", minWireAmountIncThreshold);
             }
             
             waitASecond();
