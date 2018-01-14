@@ -72,7 +72,7 @@ public abstract class SimpleAction implements Runnable {
         long cent = amount % 100;
         long dollar = (amount - cent) / 100;
         
-        return "$" + dollar + "." + cent;
+        return "$" + dollar + "." + (cent < 10 ? "0" : "") + cent;
     }
 
     protected void waitASecond() {
